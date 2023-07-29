@@ -24,14 +24,14 @@ def triggerBot() -> None:
         if win32api.GetAsyncKeyState(0x58):
             continue
 
-        local_player = pm.read_uint(client + offsets["localPlayer"])
-        local_health = pm.read_int(local_player + offsets["health"])
+        localPlayer = pm.read_uint(client + offsets["localPlayer"])
+        localHealth = pm.read_int(localPlayer + offsets["health"])
 
         # if the local player is dead
-        if not local_health:
+        if not localHealth:
             continue
 
-        crosshairId = pm.read_int(local_player + offsets['crosshairId'])
+        crosshairId = pm.read_int(localPlayer + offsets['crosshairId'])
 
         # competitors take values between 1 and 64
         if not crosshairId or crosshairId > 64:
@@ -44,7 +44,7 @@ def triggerBot() -> None:
             continue
 
         # If not from your team
-        if pm.read_uint(player + offsets["teamNum"]) == pm.read_uint(local_player + offsets["teamNum"]):
+        if pm.read_uint(player + offsets["teamNum"]) == pm.read_uint(localPlayer + offsets["teamNum"]):
             continue
         
         # shoot
